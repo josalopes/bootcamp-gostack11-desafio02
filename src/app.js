@@ -12,11 +12,14 @@ app.use(cors());
 const repositories = [];
 
 app.get("/repositories", (request, response) => {
-  // TODO
+  const { title } = request.query;
+
+  const results = title ? repositories.filter(repository => repository.title.includes(title)) : repositories;
+  return response.json(results);
 });
 
 app.post("/repositories", (request, response) => {
-  // TODO
+
   const { title, url, techs } = request.body;
 
   const repository = { id: uuid(), title, url, techs, likes: 0 };
@@ -26,7 +29,23 @@ app.post("/repositories", (request, response) => {
 });
 
 app.put("/repositories/:id", (request, response) => {
-  // TODO
+  const { id } = request.params;
+  const { title, url, techs } = request.body;
+
+  const projectIndex = repositories.findIndex(repository => repository.id === id);
+  if (projectIndex < 0) {
+    return response.status(400).json({ error: 'Repository not found' });
+  }
+
+  const repository = {
+    id,
+    title,
+    url,
+    techs
+  }
+
+  repositories[projectIndex] = repository;
+  return response.json(repository);
 });
 
 app.delete("/repositories/:id", (request, response) => {

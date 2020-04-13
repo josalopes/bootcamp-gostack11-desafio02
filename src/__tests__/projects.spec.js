@@ -21,7 +21,7 @@ describe("Projects", () => {
     });
   });
 
-  /* it("should be able to list the projects", async () => {
+  it("should be able to list the projects", async () => {
     const repository = await request(app)
       .post("/repositories")
       .send({
@@ -54,6 +54,8 @@ describe("Projects", () => {
         techs: ["Node", "Express", "TypeScript"]
       });
 
+    console.log(repository.body.id);
+
     const response = await request(app)
       .put(`/repositories/${repository.body.id}`)
       .send({
@@ -71,7 +73,7 @@ describe("Projects", () => {
     });
   });
 
-  it("should not be able to update a repository that does not exist", async () => {
+  /* it("should not be able to update a repository that does not exist", async () => {
     await request(app)
       .put(`/repositories/123`)
       .expect(400);
