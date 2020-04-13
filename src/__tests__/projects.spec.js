@@ -11,7 +11,6 @@ describe("Projects", () => {
         title: "Umbriel",
         techs: ["Node", "Express", "TypeScript"]
       });
-
     expect(isUuid(response.body.id)).toBe(true);
 
     expect(response.body).toMatchObject({
@@ -22,7 +21,7 @@ describe("Projects", () => {
     });
   });
 
-  it("should be able to list the projects", async () => {
+  /* it("should be able to list the projects", async () => {
     const repository = await request(app)
       .post("/repositories")
       .send({
@@ -122,5 +121,5 @@ describe("Projects", () => {
     await request(app)
       .delete(`/repositories/123`)
       .expect(400);
-  });
+  }); */
 });
